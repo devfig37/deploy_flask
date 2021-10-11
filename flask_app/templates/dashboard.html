@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <title>Figs Finances</title>
+  </head>
+  <body
+    style="background-image: url('static/bank1.jpg'); background-size: cover"
+  >
+    <div class="text-right m-5">
+      <a href="/new" class="btn btn-success" role="button">New Company</a>
+      <a href="/api_call" class="btn btn-outline-warning" role="button"
+        >Stocks</a
+      >
+      <a href="/logout" class="btn btn-danger" role="button">Logout</a>
+    </div>
+    <div class="container text-center">
+      <h1>Dashboard for {{user.first_name}} {{user.last_name}}</h1>
+      <div class="row justify-content-md-center">
+        <table class="col-md-4">
+          <thead>
+            <th>Company Name</th>
+            <th>Amount</th>
+            <th>Paid</th>
+            <th>Options</th>
+          </thead>
+          <tbody>
+            {% for company in companies %}
+            <tr>
+              <td>{{company.name}}</td>
+              <td>${{company.amount}}</td>
+              <td>{{company.paid}}</td>
+              {% if company.users_id == session.user_id %}
+              <td>
+                <a href="/{{company.id}}/edit">Edit</a> |
+                <a href="/{{company.id}}/delete">Delete</a>
+              </td>
+              {% endif %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="container text-center"></div>
+  </body>
+</html>

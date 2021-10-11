@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <title>Figs Finances</title>
+  </head>
+  <body
+    style="background-size: cover; background-image: url({{ url_for('static', filename='/bank1.jpg') }}"
+  >
+    <div class="text-right m-5">
+      <a href="/dashboard" class="btn btn-success" role="button">Dashboard</a>
+
+      <a href="/logout" class="btn btn-danger" role="button">Logout</a>
+    </div>
+    <div class="container">
+      <div class="text-center">
+        <h1>Edit {{company.name}}</h1>
+      </div>
+      <div class="row justify-content-center">
+        <form action="/{{company.id}}/update" method="POST" class="col-md-5">
+          {% with messages = get_flashed_messages() %} {% if messages %} {% for
+          message in messages %}
+          <p>{{message}}</p>
+          {% endfor %} {% endif %} {% endwith %}
+          <input type="hidden" name="id" value="{{company.id}}" />
+          <label for="name">Name:</label>
+          <input
+            type="text"
+            name="name"
+            class="form-control"
+            value="{{company.name}}"
+          />
+          <label for="amount">Amount:</label>
+          <input
+            type="text"
+            name="amount"
+            class="form-control"
+            value="{{company.amount}}"
+          />
+          <label for="paid">Paid:</label>
+          <input
+            type="text"
+            name="paid"
+            class="form-control"
+            value="{{company.paid}}"
+          />
+          <br />
+          <button class="btn btn-primary">Edit Company</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
